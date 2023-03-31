@@ -18,6 +18,15 @@
       "@/*": ["./src/*"]
     }
   },
+  "plugins": [
+    {
+      "name": "typescript-styled-plugin",
+      "tags": [
+        "styled",
+        "css", /*and others that you like it!*/
+      ]
+    }
+  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
