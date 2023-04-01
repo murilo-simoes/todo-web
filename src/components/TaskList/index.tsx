@@ -77,6 +77,7 @@ const TaskList = () => {
                     ) : (
                       <TaskTitle
                         style={{
+                          color: "#929292",
                           textDecoration: "line-through",
                           cursor: "pointer",
                         }}
@@ -103,6 +104,7 @@ const TaskList = () => {
                     ) : (
                       <TaskDesc
                         style={{
+                          color: "#727272",
                           textDecoration: "line-through",
                           cursor: "pointer",
                         }}
@@ -127,7 +129,7 @@ const TaskList = () => {
                         onClick={() => readyTasks(item.title)}
                         style={{
                           fontSize: "0.9rem",
-                          color: "#2a2929",
+                          color: "#4a4a4a",
                           textDecoration: "line-through",
                           cursor: "pointer",
                         }}
