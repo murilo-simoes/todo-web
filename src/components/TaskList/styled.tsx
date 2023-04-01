@@ -94,6 +94,8 @@ export const TaskTitle = styled.h1`
   margin-bottom: 1rem;
   font-weight: bold;
   margin-top: 1rem;
+  width: 90%;
+  overflow-wrap: break-word;
   @media screen and (max-width: 400px) {
     font-size: 1.2rem;
   }
@@ -106,7 +108,8 @@ export const TaskDesc = styled.p`
   text-align: justify;
   line-height: 1.1rem;
   text-justify: inter-word;
-
+  width: 90%;
+  overflow-wrap: break-word;
   @media screen and (max-width: 400px) {
     font-size: 0.9rem;
   }
