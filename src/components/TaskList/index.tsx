@@ -42,7 +42,11 @@ const TaskList = () => {
   useEffect(() => {
     async function selectAllTasks() {
       const allTasks = await api.get("/tasks");
-      setTasks(allTasks.data);
+      const sortedAvictivities = allTasks.data.sort(
+        (a: any, b: any) => b.id - a.id
+      );
+      setTasks(sortedAvictivities);
+      console.log(tasks);
     }
     selectAllTasks();
   }, [tasks]);
