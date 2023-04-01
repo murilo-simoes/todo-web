@@ -4,10 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Container, Task, TaskDesc, TaskTitle, Wrapper } from "./styled";
 import { api } from "@/api/axios";
+import { formatDate } from "@/types/utils";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
-
   const notify = () => toast.success("Tarefa excluída com sucesso!");
   const notifyReady = () => toast.success("Tarefa concluída!! Uhuuuuu!");
   const notifyNotReady = () =>
@@ -116,7 +116,7 @@ const TaskList = () => {
                           cursor: "pointer",
                         }}
                       >
-                        {item.createdAt.substring(10, 0)}
+                        {formatDate(item.createdAt)}
                       </TaskDesc>
                     ) : (
                       <TaskDesc
@@ -128,7 +128,7 @@ const TaskList = () => {
                           cursor: "pointer",
                         }}
                       >
-                        {item.createdAt.substring(10, 0)}
+                        {formatDate(item.createdAt)}
                       </TaskDesc>
                     )}
                   </div>
