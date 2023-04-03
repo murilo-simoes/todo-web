@@ -46,7 +46,6 @@ const TaskList = () => {
         (a: any, b: any) => b.id - a.id
       );
       setTasks(sortedAvictivities);
-      console.log(tasks);
     }
     selectAllTasks();
   }, [tasks]);
