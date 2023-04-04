@@ -13,13 +13,26 @@ const TaskList = () => {
   const notifyNotReady = () =>
     toast.info("Melhor tentar de novo, não desista!");
 
+  //fazer o select de todas as tasks
+  function selectAllTasks() {
+    api.get("/tasks").then((response) => {
+      const sortedAvictivities = response.data.sort(
+        (a: any, b: any) => b.id - a.id
+      );
+      setTasks(sortedAvictivities);
+    });
+  }
+  useEffect(() => {
+    selectAllTasks();
+  }, []);
+
   //deletar as tasks
   async function deleteTasks(title: any) {
     const deleteTask = await api.post("/delTask", {
       title: title,
     });
-
-    return notify();
+    selectAllTasks();
+    notify();
   }
 
   //colocar a task como pronta
@@ -29,27 +42,16 @@ const TaskList = () => {
         title: title,
       });
       if (readyTask.data.isDone === false) {
-        return notifyNotReady();
+        selectAllTasks();
+        notifyNotReady();
       } else {
-        return notifyReady();
+        selectAllTasks();
+        notifyReady();
       }
     } catch (err) {
       console.log(err);
     }
   }
-
-  async function selectAllTasks() {
-    const allTasks = await api.get("/tasks");
-    const sortedAvictivities = allTasks.data.sort(
-      (a: any, b: any) => b.id - a.id
-    );
-    setTasks(sortedAvictivities);
-  }
-
-  //fazer o select de todas as tasks
-  useEffect(() => {
-    selectAllTasks();
-  }, [setTasks]);
 
   return (
     <>
