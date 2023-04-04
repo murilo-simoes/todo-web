@@ -49,7 +49,7 @@ const TaskList = () => {
   //fazer o select de todas as tasks
   useEffect(() => {
     selectAllTasks();
-  });
+  }, [setTasks]);
 
   return (
     <>
