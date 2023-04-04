@@ -38,17 +38,18 @@ const TaskList = () => {
     }
   }
 
+  async function selectAllTasks() {
+    const allTasks = await api.get("/tasks");
+    const sortedAvictivities = allTasks.data.sort(
+      (a: any, b: any) => b.id - a.id
+    );
+    setTasks(sortedAvictivities);
+  }
+
   //fazer o select de todas as tasks
   useEffect(() => {
-    async function selectAllTasks() {
-      const allTasks = await api.get("/tasks");
-      const sortedAvictivities = allTasks.data.sort(
-        (a: any, b: any) => b.id - a.id
-      );
-      setTasks(sortedAvictivities);
-    }
     selectAllTasks();
-  }, []);
+  }, [tasks]);
 
   return (
     <>
