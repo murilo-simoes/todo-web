@@ -36,6 +36,7 @@ const CreateTask = () => {
       setTitle("");
       setDesc("");
       setTab(0);
+      window.location.reload();
       return response;
     } catch (err) {
       console.log(err);
