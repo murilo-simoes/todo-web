@@ -8,50 +8,52 @@ import { formatDate } from "@/types/utils";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
+  const [callTask, setCallTask] = useState(Math.random);
   const notify = () => toast.success("Tarefa excluída com sucesso!");
   const notifyReady = () => toast.success("Tarefa concluída!! Uhuuuuu!");
   const notifyNotReady = () =>
     toast.info("Melhor tentar de novo, não desista!");
 
   //fazer o select de todas as tasks
-  function selectAllTasks() {
-    api.get("/tasks").then((response) => {
+  async function selectAllTasks() {
+    await api.get("/tasks").then((response) => {
       const sortedAvictivities = response.data.sort(
         (a: any, b: any) => b.id - a.id
       );
       setTasks(sortedAvictivities);
     });
   }
-  useEffect(() => {
-    selectAllTasks();
-  }, []);
 
   //deletar as tasks
   async function deleteTasks(title: any) {
-    const deleteTask = await api.post("/delTask", {
-      title: title,
-    });
-    selectAllTasks();
-    notify();
+    await api
+      .post("/delTask", {
+        title: title,
+      })
+      .then(() => {
+        setCallTask(Math.random);
+        notify();
+      });
   }
 
   //colocar a task como pronta
   async function readyTasks(title: any) {
-    try {
-      const readyTask = await api.post("/upTask", {
+    await api
+      .post("/upTask", {
         title: title,
+      })
+      .then((response) => {
+        setCallTask(Math.random);
+        if (response.data.isDone === false) {
+          notifyNotReady();
+        } else {
+          notifyReady();
+        }
       });
-      if (readyTask.data.isDone === false) {
-        selectAllTasks();
-        notifyNotReady();
-      } else {
-        selectAllTasks();
-        notifyReady();
-      }
-    } catch (err) {
-      console.log(err);
-    }
   }
+  useEffect(() => {
+    selectAllTasks();
+  }, [callTask]);
 
   return (
     <>

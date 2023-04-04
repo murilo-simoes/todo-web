@@ -21,23 +21,28 @@ const CreateTask = () => {
   const notify = () => toast.success("Tarefa criada com sucesso!");
 
   async function createNewTask() {
+    if (title === "" || desc === "") {
+      return notifyEmpty();
+    }
+
     try {
-      if (title === "" || desc === "") {
-        return notifyEmpty();
-      }
-      const response = await api.post("/newTask", {
-        title: title,
-        desc: desc,
-      });
-      if (response.data === "Essa tarefa ja existe!") {
-        return notifyAlredyExist();
-      }
-      notify();
-      setTitle("");
-      setDesc("");
-      setTab(0);
-      window.location.reload();
-      return response;
+      await api
+        .post("/newTask", {
+          title: title,
+          desc: desc,
+        })
+        .then((response) => {
+          if (response.data === "Essa tarefa ja existe!") {
+            return notifyAlredyExist();
+          } else {
+            notify();
+            setTitle("");
+            setDesc("");
+            setTab(0);
+            window.location.reload();
+            return response;
+          }
+        });
     } catch (err) {
       console.log(err);
     }
