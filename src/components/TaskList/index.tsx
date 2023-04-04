@@ -48,7 +48,8 @@ const TaskList = () => {
       setTasks(sortedAvictivities);
     }
     selectAllTasks();
-  }, [tasks]);
+  }, []);
+
   return (
     <>
       <Container>
