@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://different-mite-fez.cyclic.app/",
+  baseURL: "https://todo-api-olive.vercel.app/",
 });
